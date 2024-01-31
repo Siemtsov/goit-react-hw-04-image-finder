@@ -29,7 +29,7 @@ const SearchBar = ({ onSubmit }) => {
           name="searchName"
           type="text"
           id="search"
-          value={this.state.inputValue}
+          value={inputValue}
           onChange={handleChange}
         />
       </SearchForm>
