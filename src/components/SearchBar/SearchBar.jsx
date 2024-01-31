@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import {
   SearchForm,
   SearchInput,
@@ -6,39 +6,35 @@ import {
   SearchSpan,
 } from './SearchBar.styled';
 
-class SearchBar extends Component {
-  state = {
-    inputValue: '',
-  };
+const SearchBar = ({ onSubmit }) => {
+  const [searchName, setSearchName] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
-  handleChange = event => {
-    this.setState({ inputValue: event.target.value });
-  };
+  const handleChange = event => setInputValue(event.target.value);
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(this.state.inputValue);
+    setSearchName(inputValue.trim());
+    onSubmit(searchName);
     event.target.reset();
   };
 
-  render() {
-    return (
-      <header>
-        <SearchForm onSubmit={this.handleSubmit}>
-          <SearchButton>
-            <SearchSpan>Search</SearchSpan>
-          </SearchButton>
-          <SearchInput
-            name="searchName"
-            type="text"
-            id="search"
-            value={this.state.inputValue}
-            onChange={this.handleChange}
-          />
-        </SearchForm>
-      </header>
-    );
-  }
-}
+  return (
+    <header>
+      <SearchForm onSubmit={handleSubmit}>
+        <SearchButton>
+          <SearchSpan>Search</SearchSpan>
+        </SearchButton>
+        <SearchInput
+          name="searchName"
+          type="text"
+          id="search"
+          value={this.state.inputValue}
+          onChange={handleChange}
+        />
+      </SearchForm>
+    </header>
+  );
+};
 
 export default SearchBar;
