@@ -53,7 +53,7 @@ const App = () => {
   };
 
   return (
-    <>
+    <div>
       <ToastContainer transition={Slide} />
       <SearchBar onSubmit={handleSubmit} />
       {images.length > 0 ? (
@@ -67,7 +67,7 @@ const App = () => {
       {images.length > 0 && totalPages !== currentPage && !isLoading && (
         <Button onClick={loadMore} />
       )}
-    </>
+    </div>
   );
 };
 
